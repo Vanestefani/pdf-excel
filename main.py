@@ -7,7 +7,9 @@ from PyPDF2 import PdfReader
 
 #Definicion variables
 colorFondo='#F3ECB0'
-tamañoVentanaPrincipal="600x400+0+0"
+ancho_ventana = 600
+alto_ventana = 400
+
 colorPrimario='#344D67'
 colorSecundario='#ADE792'
 colorTerciario='#6ECCAF'
@@ -26,14 +28,23 @@ right = 1100
 
 #ventana principal
 root = tk.Tk()
+# Obtiene la anchura y altura de la pantalla
+ancho_pantalla = root.winfo_screenwidth()
+alto_pantalla = root.winfo_screenheight()
 # Cargar el archivo .ico
 imagen_icono = Image.open("./Img/icono.ico")
 icono = ImageTk.PhotoImage(imagen_icono)
 # Establecer el icono de la ventana
 root.iconphoto(True, icono)
 
+
+# Calcula las coordenadas x e y de la ventana para que se centre en la pantalla
+x = (ancho_pantalla / 2) - (ancho_ventana / 2)
+y = (alto_pantalla / 2) - (alto_ventana / 2)
+
 #definir tañano de la ventana  ( anchura x altura)
-root.geometry(tamañoVentanaPrincipal)
+root.geometry("%dx%d+%d+%d" % (ancho_ventana, alto_ventana, x, y))
+
 #definir color
 root.configure(background=colorFondo)
 

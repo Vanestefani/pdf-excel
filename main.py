@@ -14,6 +14,16 @@ colorTerciario='#6ECCAF'
 Fuente='Courier'
 tamaño_fuente=14
 opciones = ["CSV", "Excel"]
+# Definir la página de inicio
+start_page = 2
+finish_page = 3
+
+# Definir los límites de la región de la página que se va a leer
+top = 10
+left = 10
+bottom = 780  
+right = 1100
+
 #ventana principal
 root = tk.Tk()
 # Cargar el archivo .ico
@@ -31,6 +41,8 @@ root.configure(background=colorFondo)
 #Nombre de ventana
 
 tk.Wm.wm_title(root,"Extraer tablas pdf a excel")
+# Evitar que el usuario modifique el tamaño de la ventana
+root.resizable(width=False, height=False)
 
 #Añadir encabesado
 header = tk.Frame(root,height=20, bg=colorSecundario)
@@ -55,10 +67,20 @@ def open_file():
         title='Seleccionar archivo',
         filetypes=[('Archivos PDF', '*.pdf')]
     )
+     if file_path:
+        file_name = file_path.split('/')[-1]
+        file_label.config(text=file_name)
+        file_label.grid(row=0, column=3, padx=0, pady=0)
+        print('Nombre de archivo seleccionado:', file_name)
    
 #Creacion de boton para subir archivo
 file_button = tk.Button(contenido, text="Selecciona archivo", command=open_file , font=(Fuente,tamaño_fuente) ,bg=colorTerciario , fg="white")
 file_button.grid(row=0, column=2, padx=0, pady=0)
+file_label = tk.Label(contenido, text='',bg=colorFondo)
+
+
+
+
 # Definir la variable de control y establecer el valor predeterminado
 var = tk.StringVar(value=opciones[0])
 

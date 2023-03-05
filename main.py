@@ -5,6 +5,8 @@ from tkinter import filedialog
 from PIL import ImageTk, Image
 from PyPDF2 import PdfReader
 
+
+
 #Definicion variables
 colorFondo='#F3ECB0'
 ancho_ventana = 600
@@ -83,6 +85,17 @@ def open_file():
         file_label.config(text=file_name)
         file_label.grid(row=0, column=3, padx=0, pady=0)
         print('Nombre de archivo seleccionado:', file_name)
+         # Leer contenido del archivo PDF
+     # Leer archivo como bytes
+     with open(file_path, 'rb') as f:
+        file_bytes = f.read()
+
+        # Leer archivo como PDF
+        pdf = PdfReader(io.BytesIO(file_bytes))
+    
+     # Imprimir información del PDF
+     print("Número de páginas:", len(pdf.pages))
+     #print("Tamaño de la página 1:", pdf.getPage(0).mediaBox)
    
 #Creacion de boton para subir archivo
 file_button = tk.Button(contenido, text="Selecciona archivo", command=open_file , font=(Fuente,tamaño_fuente) ,bg=colorTerciario , fg="white")
